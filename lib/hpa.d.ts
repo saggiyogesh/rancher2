@@ -1,3 +1,4 @@
+import { hpa } from './main';
 export interface IHPA {
     projectId: string;
     namespaceId: string;
@@ -15,5 +16,5 @@ export interface IHPA {
     transitioning: string;
     transitioningMessage: string;
 }
-export declare function getAll(projectName: string): Promise<IHPA[]>;
-export declare function update(hpaObj: IHPA): Promise<IHPA>;
+export declare function getAll(projectName: string): Promise<hpa.IHPA[]>;
+export declare function update(hpaObj: IHPA): Promise<hpa.IHPA>;
