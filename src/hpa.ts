@@ -1,5 +1,7 @@
+import assert from 'assert';
 import { getUniqueProject } from './project';
 import { client } from './utils';
+import { hpa } from './main';
 
 export interface IHPA {
   projectId: string;
@@ -29,6 +31,8 @@ export async function getAll(projectName: string) {
 
 export async function update(hpaObj: IHPA) {
   const { projectId, id } = hpaObj;
-  const { data } = await client.put(`/project/${projectId}/horizontalPodAutoscalers/${id}`);
+  assert(projectId, 'Missing Project Id');
+  assert(id, 'Missing HPA Id');
+  const { data } = await client.put(`/project/${projectId}/horizontalPodAutoscalers/${id}`, hpaObj);
   return (data.data as any) as IHPA;
 }

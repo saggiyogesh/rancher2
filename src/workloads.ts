@@ -1,3 +1,4 @@
+import assert from 'assert';
 import { getUniqueProject } from './project';
 import { client } from './utils';
 
@@ -35,7 +36,9 @@ export async function getAllWorkloads(projectName: string) {
 
 export async function update(deploymentObj: IDeployment) {
   const { projectId, id } = deploymentObj;
-  const { data } = await client.put(`project/${projectId}/workloads/${id}`);
+  assert(projectId, 'Missing Project Id');
+  assert(id, 'Missing Id');
+  const { data } = await client.put(`project/${projectId}/workloads/${id}`, deploymentObj);
   return (data.data as any) as IDeployment;
 }
 
